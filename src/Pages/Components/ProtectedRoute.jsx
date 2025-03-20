@@ -6,7 +6,7 @@ function ProtectedRoute({children}) {
     const dataset = useContext(ResContext);
 
     if (dataset.loading) {
-        return <h1>Masih loading</h1>;
+        return null;
     }
 
     if (!dataset.userData) {

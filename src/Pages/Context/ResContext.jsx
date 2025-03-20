@@ -28,14 +28,13 @@ export const ResProvider = ({children}) => {
             const TokenUser = localStorage.getItem('token');
 
             if (TokenUser) {
-                console.log("TEST 2")
                 try {
                     await axios.get('http://localhost:8000/api/user', {
                         headers: {
                             Authorization: `Bearer ${TokenUser}`
                         }
                     }).then((response) => {
-                        masukanUser(response.data.user);
+                        masukanUser(response.data);
                     }); 
                 } catch (eror) {
                     console.log(eror)
@@ -45,7 +44,7 @@ export const ResProvider = ({children}) => {
         }
 
         InitilisasiData();
-    })
+    }, [])
 
     return <ResContext.Provider value={{token, userData, loading, masukanUser, gantiToken}}>{children}</ResContext.Provider>;
 }

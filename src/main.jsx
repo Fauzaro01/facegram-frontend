@@ -9,6 +9,7 @@ import RegisterPage from "./Pages/Register.jsx";
 import { ResProvider } from "./Pages/Context/ResContext.jsx";
 import Dashboard from "./Pages/Dashboard.jsx";
 import LoginPage from "./Pages/Login.jsx";
+import CreatePost from "./Pages/CreatePost.jsx";
 import ProtectedRoute from "./Pages/Components/ProtectedRoute.jsx";
 
 createRoot(document.getElementById("root")).render(
@@ -26,6 +27,11 @@ createRoot(document.getElementById("root")).render(
             </ProtectedRoute>
           }
         />
+        <Route path="/createpost" element={
+          <ProtectedRoute>
+            <CreatePost />
+          </ProtectedRoute>
+        }/>
       </Routes>
     </BrowserRouter>
   </ResProvider>

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Navbar from "./Components/Navbar";
 import axios from "axios";
 import { ResContext } from "./Context/ResContext";
-import { redirect, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const URL_API = 'http://localhost:8000/api/v1';
 
@@ -25,7 +25,6 @@ function RegisterPage() {
             dataset.masukanUser(response.data.user);
             dataset.gantiToken(response.data.token);
             navigate('/dashboard');
-            console.log("SEHARUSNYA UDAH perGI")
         });
 
     }

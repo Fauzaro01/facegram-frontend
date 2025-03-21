@@ -11,6 +11,7 @@ import Dashboard from "./Pages/Dashboard.jsx";
 import LoginPage from "./Pages/Login.jsx";
 import CreatePost from "./Pages/CreatePost.jsx";
 import ProtectedRoute from "./Pages/Components/ProtectedRoute.jsx";
+import Profile from "./Pages/Profile.jsx";
 
 createRoot(document.getElementById("root")).render(
   <ResProvider>
@@ -30,6 +31,11 @@ createRoot(document.getElementById("root")).render(
         <Route path="/createpost" element={
           <ProtectedRoute>
             <CreatePost />
+          </ProtectedRoute>
+        }/>
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         }/>
       </Routes>

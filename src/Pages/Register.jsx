@@ -13,7 +13,6 @@ function RegisterPage() {
         username: '',
         password: '',
         is_private: false
-
     });
     
     const dataset = useContext(ResContext);
@@ -24,6 +23,7 @@ function RegisterPage() {
         await axios.post(URL_API+'/auth/register', formData).then((response) => {
             dataset.masukanUser(response.data.user);
             dataset.gantiToken(response.data.token);
+            localStorage.setItem('token', response.data.token)
             navigate('/dashboard');
         });
 

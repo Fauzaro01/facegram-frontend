@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import { ResContext } from "../Context/ResContext";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const dataset = useContext(ResContext);
+
+  async function logoutButtom() {
+    await axios.post('http://localhost:8000/api/v1/auth/logout', {
+      username: 'admin',
+      password: 'admin123'
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    }).then((response) => {
+      if (response.status == 200) {
+        dataset.setMessage("Anda Berhasil Logout!")
+        localStorage.clear('token')
+        navigate('/login');
+        
+      }
+    })
+  }
+
   return (
     <div className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
@@ -25,16 +49,20 @@ function Navbar() {
                 Home
               </a>
             </li>
-            <li className="nav-item">
-              <a href="/#helna" className="nav-link">
-                Product
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="/#test" className="nav-link">
-                Dist
-              </a>
-            </li>
+            {localStorage.getItem('token') && (
+              <>
+                <li className="nav-item">
+                  <a href="/profile" className="nav-link">
+                    Profile
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <button className="nav-link" onClick={logoutButtom}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

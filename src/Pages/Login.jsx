@@ -19,6 +19,7 @@ function LoginPage() {
             dataset.gantiToken(response.data.token);
             localStorage.setItem('token', response.data.token);
             dataset.masukanUser(response.data.user);
+            dataset.setMessage("Anda berhasil login pada akun", response.data.user.username);
             navigate('/dashboard');
         })
     }
@@ -30,6 +31,9 @@ function LoginPage() {
           <div className="card mx-auto">
             <div className="card-header">Login Page</div>
             <div className="card-body">
+              {dataset.message && (
+                <div className="alert alert-warning">{dataset.message}</div>
+              )}
               <div className="input-group mb-3">
                 <span className="input-group-text">Username</span>
                 <input
@@ -58,7 +62,9 @@ function LoginPage() {
                   }
                 />
               </div>
-              <button className="btn btn-outline-primary" onClick={LoginButton}>Masuk</button>
+              <button className="btn btn-outline-primary" onClick={LoginButton}>
+                Masuk
+              </button>
             </div>
           </div>
         </div>

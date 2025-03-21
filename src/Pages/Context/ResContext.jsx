@@ -3,15 +3,18 @@ import { createContext, useEffect, useState } from "react";
 
 export const ResContext = createContext({
     userData: null,
+    message: '',
     token: '',
     loading: true,
     gantiToken: () => {},
-    masukanUser:() => {}
+    masukanUser:() => {},
+    setMessage: () => {},
 });
 
 export const ResProvider = ({children}) => {
     const [token, setToken] = useState('');
     const [userData, setUserData] = useState(null); 
+    const [message, setMsg] = useState('');
 
     const gantiToken = (token) => {
         setToken(token);
@@ -19,6 +22,13 @@ export const ResProvider = ({children}) => {
 
     const masukanUser = (userdata) => {
         setUserData(userdata)
+    }
+
+    const setMessage = (pesan) => {
+        setMsg(pesan);
+        setTimeout(() => {
+            setMsg("")
+        }, 4000);
     }
 
     const [loading, setloading] = useState(true);
@@ -46,5 +56,5 @@ export const ResProvider = ({children}) => {
         InitilisasiData();
     }, [])
 
-    return <ResContext.Provider value={{token, userData, loading, masukanUser, gantiToken}}>{children}</ResContext.Provider>;
+    return <ResContext.Provider value={{token, userData, message, loading, masukanUser, setMessage, gantiToken}}>{children}</ResContext.Provider>;
 }
